@@ -6,7 +6,7 @@
 /*   By: qutruche <qutruche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:01:17 by qutruche          #+#    #+#             */
-/*   Updated: 2024/11/15 14:09:43 by qutruche         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:57:44 by qutruche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ static int	ft_getsize(int nb, size_t baselen)
 	}
 	else
 		n = (long int)nb;
-	while (n != 0)
+	while (n / baselen)
 	{
 		++c;
 		n /= baselen;
 	}
+	++c;
 	return (c);
 }
 
@@ -47,12 +48,13 @@ static void	ft_fillstr(char *s, int nb, char *base, size_t baselen)
 	else
 		n = (long int)nb;
 	s[size--] = 0;
-	while (n != 0)
+	while (n / baselen)
 	{
 		s[size] = base[n % baselen];
 		n /= baselen;
 		size--;
 	}
+	s[size] = base[n % baselen];
 }
 
 char	*ft_itoa_base(int n, char *base)

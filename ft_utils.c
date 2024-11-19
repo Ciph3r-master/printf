@@ -6,15 +6,15 @@
 /*   By: qutruche <qutruche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:39:05 by qutruche          #+#    #+#             */
-/*   Updated: 2024/11/15 16:19:33 by qutruche         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:51:27 by qutruche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -22,10 +22,10 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-size_t	ft_putstr(char *s)
+int	ft_putstr(char *s)
 {
 	int		i;
-	size_t	size;
+	int		size;
 
 	if (!s)
 	{
@@ -39,17 +39,17 @@ size_t	ft_putstr(char *s)
 	return (size);
 }
 
-size_t	ft_putchar(unsigned char c)
+int	ft_putchar(unsigned char c)
 {
-	size_t	i;
+	int	i;
 
 	i = write(1, &c, 1);
 	return (i);
 }
 
-size_t	ft_puthexa(int n, char is_upper)
+int	ft_puthexa(int n, char is_upper)
 {
-	size_t	size;
+	int	size;
 
 	if (is_upper)
 		size = ft_putunbr_base(n, "0123456789ABCDEF");
@@ -58,10 +58,10 @@ size_t	ft_puthexa(int n, char is_upper)
 	return (size);
 }
 
-size_t	ft_putnbr_base(int n, char *base)
+int	ft_putnbr_base(int n, char *base)
 {
 	char	*s;
-	size_t	size;
+	int		size;
 
 	s = ft_itoa_base(n, base);
 	size = ft_putstr(s);
@@ -69,10 +69,10 @@ size_t	ft_putnbr_base(int n, char *base)
 	return (size);
 }
 
-size_t	ft_putunbr_base(unsigned int n, char *base)
+int	ft_putunbr_base(unsigned int n, char *base)
 {
 	char	*s;
-	size_t	size;
+	int		size;
 
 	s = ft_uitoa_base(n, base);
 	size = ft_putstr(s);
@@ -80,10 +80,10 @@ size_t	ft_putunbr_base(unsigned int n, char *base)
 	return (size);
 }
 
-size_t	ft_putptr(void *ptr)
+int	ft_putptr(void *ptr)
 {
 	char	*s;
-	size_t	size;
+	int		size;
 
 	if (!ptr)
 	{
