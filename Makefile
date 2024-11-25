@@ -1,4 +1,5 @@
-SRCS= 	ft_itoa_base.c ft_printf.c ft_uitoa_base.c ft_utils.c
+SRCS= 	ft_itoa_base.c ft_printf.c ft_ultoa_base.c \
+		ft_utils.c ft_utils_base.c
 
 INCLUDES= ft_printf.h
 NAME= libftprintf.a
@@ -12,7 +13,7 @@ FLAGS= -Wall -Werror -Wextra
 
 $(OBJ_DIR)/%.o : %.c $(INCLUDES) Makefile
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(FLAGS) -c $< -o $@ -I $(INCLUDES)
+	$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME) Makefile
 

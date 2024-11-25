@@ -6,7 +6,7 @@
 /*   By: qutruche <qutruche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:01:17 by qutruche          #+#    #+#             */
-/*   Updated: 2024/11/19 17:57:44 by qutruche         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:25:21 by qutruche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ char	*ft_itoa_base(int n, char *base)
 	char	*s;
 	int		size;
 	size_t	baselen;
-
 
 	baselen = ft_strlen(base);
 	size = ft_getsize(n, baselen);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_uitoa_base.c                                    :+:      :+:    :+:   */
+/*   ft_ultoa_base.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qutruche <qutruche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:01:17 by qutruche          #+#    #+#             */
-/*   Updated: 2024/11/19 17:23:15 by qutruche         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:36:12 by qutruche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,11 @@ static void	ft_fillstr(char *s, unsigned long nb, char *base, size_t baselen)
 	s[size] = base[nb % baselen];
 }
 
-char	*ft_uitoa_base(unsigned long n, char *base)
+char	*ft_ultoa_base(unsigned long n, char *base)
 {
 	char	*s;
 	int		size;
 	size_t	baselen;
-
 
 	baselen = ft_strlen(base);
 	size = ft_getsize(n, baselen);

@@ -6,14 +6,15 @@
 /*   By: qutruche <qutruche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:14:33 by qutruche          #+#    #+#             */
-/*   Updated: 2024/11/19 18:00:25 by qutruche         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:36:34 by qutruche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_printargs(va_list list, char c)
+static int	ft_printargs(va_list list, char c, size_t *i)
 {
+	*i += 1;
 	if (c == 's')
 		return (ft_putstr(va_arg(list, char *)));
 	if (c == 'c')
@@ -28,27 +29,25 @@ static int	ft_printargs(va_list list, char c)
 		return (ft_putunbr_base(va_arg(list, unsigned int), "0123456789"));
 	if (c == 'p')
 		return (ft_putptr(va_arg(list, void *)));
+	*i -= 1;
 	return (0);
 }
 
 int	ft_printf(const char *format, ...)
 {
 	va_list		list;
-	size_t		len;
 	size_t		i;
 	int			count;
 
+	if (!format)
+		return (-1);
 	i = 0;
-	len = ft_strlen(format);
 	count = 0;
 	va_start(list, format);
-	while (i < len)
+	while (format[i])
 	{
 		if (format[i] == '%')
-		{
-			count += ft_printargs(list, format[i + 1]);
-			i++;
-		}
+			count += ft_printargs(list, format[i + 1], &i);
 		else
 			count += ft_putchar(format[i]);
 		i++;
@@ -56,12 +55,3 @@ int	ft_printf(const char *format, ...)
 	va_end(list);
 	return (count);
 }
-/* #include "limits.h"
-int main(void)
-{
-	size_t	size;
-
-	size = 0;
-	size = ft_printf(" %d\n", 0);
-	return 0;
-}  */
