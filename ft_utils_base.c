@@ -6,48 +6,56 @@
 /*   By: qutruche <qutruche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:23:57 by qutruche          #+#    #+#             */
-/*   Updated: 2024/11/25 12:33:22 by qutruche         ###   ########.fr       */
+/*   Updated: 2024/12/17 21:04:11 by qutruche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_puthexa(int n, char is_upper)
+int	ft_puthexa(unsigned long n, char is_upper)
 {
-	int	size;
+	int			size;
 
 	if (is_upper)
-		size = ft_putunbr_base(n, "0123456789ABCDEF");
+		size = ft_putunbr_base(n, "0123456789ABCDEF", 16);
 	else
-		size = ft_putunbr_base(n, "0123456789abcdef");
+		size = ft_putunbr_base(n, "0123456789abcdef", 16);
 	return (size);
 }
 
-int	ft_putnbr_base(int n, char *base)
+int	ft_putnbr_base(int nb, char *base, int baselen)
 {
-	char	*s;
-	int		size;
+	unsigned int	n;
+	int				count;
 
-	s = ft_itoa_base(n, base);
-	size = ft_putstr(s);
-	free(s);
-	return (size);
+	count = 0;
+	if (nb < 0)
+	{
+		write(1, "-", 1);
+		n = nb * -1;
+		count += 1;
+	}
+	else
+		n = nb;
+	if (n >= (unsigned int)baselen)
+		count += ft_putnbr_base(n / baselen, base, baselen);
+	count += write(1, &base[n % baselen], 1);
+	return (count);
 }
 
-int	ft_putunbr_base(unsigned int n, char *base)
+int	ft_putunbr_base(unsigned long n, char *base, int baselen)
 {
-	char	*s;
-	int		size;
+	int				count;
 
-	s = ft_ultoa_base(n, base);
-	size = ft_putstr(s);
-	free(s);
-	return (size);
+	count = 0;
+	if (n >= (unsigned long)baselen)
+		count += ft_putunbr_base(n / baselen, base, baselen);
+	count += write(1, &base[n % baselen], 1);
+	return (count);
 }
 
 int	ft_putptr(void *ptr)
 {
-	char	*s;
 	int		size;
 
 	size = 0;
@@ -56,10 +64,7 @@ int	ft_putptr(void *ptr)
 		ft_putstr("(nil)");
 		return (5);
 	}
-	s = ft_ultoa_base((size_t)ptr, "0123456789abcdef");
-	if (s)
-		size = ft_putstr("0x");
-	size += ft_putstr(s);
-	free(s);
+	size = ft_putstr("0x");
+	size += ft_putunbr_base((unsigned long)ptr, "0123456789abcdef", 16);
 	return (size);
 }

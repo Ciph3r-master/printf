@@ -6,7 +6,7 @@
 /*   By: qutruche <qutruche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:14:33 by qutruche          #+#    #+#             */
-/*   Updated: 2024/11/25 12:36:34 by qutruche         ###   ########.fr       */
+/*   Updated: 2024/12/17 21:04:35 by qutruche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static int	ft_printargs(va_list list, char c, size_t *i)
 	if (c == 'X' || c == 'x')
 		return (ft_puthexa(va_arg(list, unsigned int), c == 'X'));
 	if (c == 'd' || c == 'i')
-		return (ft_putnbr_base(va_arg(list, int), "0123456789"));
+		return (ft_putnbr_base(va_arg(list, int), "0123456789", 10));
 	if (c == 'u')
-		return (ft_putunbr_base(va_arg(list, unsigned int), "0123456789"));
+		return (ft_putunbr_base(va_arg(list, unsigned int), "0123456789", 10));
 	if (c == 'p')
 		return (ft_putptr(va_arg(list, void *)));
 	*i -= 1;

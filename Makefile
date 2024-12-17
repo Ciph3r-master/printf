@@ -1,4 +1,4 @@
-SRCS= 	ft_itoa_base.c ft_printf.c ft_ultoa_base.c \
+SRCS= 	ft_printf.c \
 		ft_utils.c ft_utils_base.c
 
 INCLUDES= ft_printf.h
